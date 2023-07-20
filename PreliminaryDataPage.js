@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {
   TextInput,
@@ -9,14 +9,28 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {useContext} from 'react';
 import {DataContext} from './DataContext';
-const PreliminaryDataPage = ({navigation}) => {
+const PreliminaryDataPage = ({navigation, route}) => {
   const [teamNumber, setTeamNumber] = useState('');
   const [matchNumber, setMatchNumber] = useState('');
   const [name, setName] = useState('');
   const [selectedOption, setSelectedOption] = useState('Auto Start Position');
   const {data, setData} = useContext(DataContext);
   const [menuVisible, setMenuVisible] = useState(false);
-  options = ['Barrier', 'Mid', 'Wall'];
+
+  const resetForm = () => {
+    setTeamNumber('');
+    setMatchNumber('');
+    setName('');
+  };
+
+  const options = ['Barrier', 'Mid', 'Wall'];
+
+  useEffect(() => {
+    if (route.params?.reset) {
+      resetForm();
+    }
+  }, [route.params?.reset]);
+
   const onPress = () => {
     setData(prevData => ({
       ...prevData,

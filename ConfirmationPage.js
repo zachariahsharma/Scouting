@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import axios from 'axios';
 import ProgressBar from 'react-native-progress/Bar';
 import {DataContext} from './DataContext';
-
+import {FileSystem} from 'react-native-fs';
 const ConfirmationPage = ({navigation}) => {
   const {data, setData} = useContext(DataContext);
   const [progress, setProgress] = useState(0);
@@ -20,25 +20,25 @@ const ConfirmationPage = ({navigation}) => {
 
     try {
       console.log(data);
-      const response = await axios.post('http://127.0.0.1:5000/', data, {
-        onUploadProgress: progressEvent => {
-          setProgress(progressEvent.loaded / progressEvent.total);
+      const response = await axios.post(
+        'https://93cc-2605-ef80-2c-f4-00-6c-a0da.ngrok-free.app',
+        data,
+        {
+          onUploadProgress: progressEvent => {
+            setProgress(progressEvent.loaded / progressEvent.total);
+          },
         },
-      });
+      );
       setData(prevdata => ({}));
       Alert.alert('Success', 'Data uploaded successfully!');
-    } catch (error) {
-      // Alert.alert('Error', 'Failed to upload data.');
-    }
+    } catch (error) {}
 
     setUploading(false);
   };
-
-  React.useEffect(() => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
     sendData();
   }, []);
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,

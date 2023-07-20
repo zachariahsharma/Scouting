@@ -75,7 +75,6 @@ const TeleopEndgamePage = ({navigation}) => {
               <TextInput
                 label={`Box Count (${level})`}
                 value={String(boxCount[level])}
-                keyboardType="numeric"
                 mode="outlined"
                 style={styles.numberBox}
               />
@@ -89,7 +88,6 @@ const TeleopEndgamePage = ({navigation}) => {
               <TextInput
                 label={`Cone Count (${level})`}
                 value={String(coneCount[level])}
-                keyboardType="numeric"
                 mode="outlined"
                 style={styles.numberBox}
               />
