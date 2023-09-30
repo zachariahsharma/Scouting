@@ -4,7 +4,7 @@ import {
   TextInput,
   Button,
   Provider as PaperProvider,
-  Menu,
+  Menu,Z
 } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import {useContext} from 'react';
