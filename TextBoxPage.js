@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {Button, Provider as PaperProvider} from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
 import {useContext} from 'react';
@@ -12,26 +18,35 @@ const TextBoxPage = ({navigation}) => {
     setData(prevData => ({...prevData, extrathoughts: text}));
     navigation.navigate('ConfirmationPage');
   };
-
+  const DismissKeyboard = ({children}) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}
+    </TouchableWithoutFeedback>
+  );
   return (
     <PaperProvider>
-      <LinearGradient
-        style={styles.container}
-        colors={['#40c9ff', '#3b5998', '#e81cff']}>
-        <View style={styles.box}>
-          <TextInput
-            style={styles.textInput}
-            multiline
-            numberOfLines={4}
-            onChangeText={setText}
-            value={text}
-            placeholder="Extra Thoughts?"
-          />
-          <Button mode="contained" style={styles.button} onPress={handlePress}>
-            Next
-          </Button>
-        </View>
-      </LinearGradient>
+      <DismissKeyboard>
+        <LinearGradient
+          style={styles.container}
+          colors={['#40c9ff', '#3b5998', '#e81cff']}>
+          <View style={styles.box}>
+            <TextInput
+              style={styles.textInput}
+              multiline
+              numberOfLines={4}
+              onChangeText={setText}
+              value={text}
+              placeholder="Extra Thoughts?"
+            />
+            <Button
+              mode="contained"
+              style={styles.button}
+              onPress={handlePress}>
+              Next
+            </Button>
+          </View>
+        </LinearGradient>
+      </DismissKeyboard>
     </PaperProvider>
   );
 };

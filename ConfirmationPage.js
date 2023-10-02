@@ -12,7 +12,9 @@ const ConfirmationPage = ({navigation}) => {
   const [uploading, setUploading] = useState(false);
 
   const handlePress = () => {
-    navigation.navigate('PreliminaryDataPage');
+    navigation.navigate('PreliminaryDataPage', {
+      wipe: true,
+    });
   };
 
   const sendData = async () => {
