@@ -5,6 +5,7 @@ import {
   StyleSheet,
   SafeAreaView,
   Appearance,
+  Text,
 } from 'react-native';
 import {
   TextInput,
@@ -17,9 +18,13 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {useContext} from 'react';
 import {DataContext} from './DataContext';
-const PreliminaryDataPage = ({navigation, route}) => {
-  // write a function if this react native parameters are passed from the parent has the value wipe is true then wipe
+import DeviceInfo from 'react-native-device-info';
 
+const PreliminaryDataPage = ({navigation, route}) => {
+  // write a function if this react native parameters are passed from the parent has the value wipe is true then wipe;
+  DeviceInfo.getDeviceName().then(deviceName => {
+    console.log(deviceName);
+  });
   const [teamNumber, setTeamNumber] = useState('');
   const [matchNumber, setMatchNumber] = useState('');
   const [boxCount, setBoxCount] = useState({high: 0, medium: 0, low: 0});
@@ -352,9 +357,14 @@ const PreliminaryDataPage = ({navigation, route}) => {
                 />
               ))}
             </Menu>
-            <Button mode="contained" onPress={onPress} color="#40c9ff">
+            <Button
+              mode="contained"
+              style={styles.nextButton}
+              onPress={onPress}
+              color="#40c9ff">
               Go to Next Page
             </Button>
+            <Text style={styles.crapshoot}></Text>
           </ScrollView>
         </SafeAreaView>
       </LinearGradient>
@@ -365,6 +375,12 @@ const PreliminaryDataPage = ({navigation, route}) => {
 export default PreliminaryDataPage;
 
 const styles = StyleSheet.create({
+  crapshoot: {
+    padding: 16,
+  },
+  nextButton: {
+    paddingBottom: 20,
+  },
   card: {
     borderRadius: 10,
     padding: 16,

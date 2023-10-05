@@ -18,35 +18,25 @@ const TextBoxPage = ({navigation}) => {
     setData(prevData => ({...prevData, extrathoughts: text}));
     navigation.navigate('ConfirmationPage');
   };
-  const DismissKeyboard = ({children}) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {children}
-    </TouchableWithoutFeedback>
-  );
   return (
     <PaperProvider>
-      <DismissKeyboard>
-        <LinearGradient
-          style={styles.container}
-          colors={['#40c9ff', '#3b5998', '#e81cff']}>
-          <View style={styles.box}>
-            <TextInput
-              style={styles.textInput}
-              multiline
-              numberOfLines={4}
-              onChangeText={setText}
-              value={text}
-              placeholder="Extra Thoughts?"
-            />
-            <Button
-              mode="contained"
-              style={styles.button}
-              onPress={handlePress}>
-              Next
-            </Button>
-          </View>
-        </LinearGradient>
-      </DismissKeyboard>
+      <LinearGradient
+        style={styles.container}
+        colors={['#40c9ff', '#3b5998', '#e81cff']}>
+        <View style={styles.box}>
+          <TextInput
+            style={styles.textInput}
+            multiline
+            numberOfLines={4}
+            onChangeText={setText}
+            value={text}
+            placeholder="Extra Thoughts?"
+          />
+          <Button mode="contained" style={styles.button} onPress={handlePress}>
+            Next
+          </Button>
+        </View>
+      </LinearGradient>
     </PaperProvider>
   );
 };
